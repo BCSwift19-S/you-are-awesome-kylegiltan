@@ -10,11 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    //code below first executes when the app's view first loads
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        print("The view loaded")
     }
 
-//test test
+    @IBAction func showMessagePressed(_ sender: UIButton) {
+        print("The button was clicked")
+        messageLabel.text = "You are awesome!"
+    }
 }
 
