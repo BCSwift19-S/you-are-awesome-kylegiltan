@@ -15,6 +15,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var awesomeImage: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var soundSwitch: UISwitch!
     
     var awesomePlayer = AVAudioPlayer()
     var index = -1
@@ -54,7 +55,12 @@ class ViewController: UIViewController {
             print("ERROR: file \(soundName) didn't load.")
         }
     }
-
+    @IBAction func soundSwitchPressed(_ sender: UISwitch) {
+        if soundSwitch.isOn != true && soundIndex != -1{
+                awesomePlayer.stop()
+        }
+    }
+    
     @IBAction func showMessagePressed(_ sender: UIButton) {
         
 
@@ -81,9 +87,14 @@ class ViewController: UIViewController {
         awesomeImage.image = UIImage(named: "image\(imageIndex)") 
 
         //play a sound
-        soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
-        let soundName="sound\(soundIndex)"
-        playSound(soundName: soundName, audioPlayer: &awesomePlayer)
+        if soundSwitch.isOn {
+            soundIndex = nonRepeatingRandom(lastNumber: soundIndex, maxValue: numberOfSounds)
+            let soundName="sound\(soundIndex)"
+            playSound(soundName: soundName, audioPlayer: &awesomePlayer)
+        }
+        else{
+            
+        }
         
     }
 
