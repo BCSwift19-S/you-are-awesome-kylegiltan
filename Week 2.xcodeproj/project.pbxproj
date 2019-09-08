@@ -58,8 +58,8 @@
 				2773B7D2231D94AD00C91F5C /* ViewController.swift */,
 				2773B7D4231D94AD00C91F5C /* Main.storyboard */,
 				2773B7D7231D94AF00C91F5C /* Assets.xcassets */,
-				2773B7D9231D94AF00C91F5C /* LaunchScreen.storyboard */,
 				2773B7DC231D94AF00C91F5C /* Info.plist */,
+				2773B7D9231D94AF00C91F5C /* LaunchScreen.storyboard */,
 			);
 			path = "Week 2";
 			sourceTree = "<group>";

@@ -9,14 +9,19 @@
 //test test week 3 test test
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var awesomeImage: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
+    
+    var awesomePlayer = AVAudioPlayer()
     var index = -1
     var imageIndex = -1
+    var soundIndex = -1
     let numberOfImages = 10
+    let numberOfSounds = 6
     
     //code below first executes when the app's view first loads
     override func viewDidLoad() {
@@ -26,19 +31,7 @@ class ViewController: UIViewController {
 
     @IBAction func showMessagePressed(_ sender: UIButton) {
         
-//        let message1 = "You are awesome!"
-//        let message2 = "You are great!"
-//        let message3 = "You are amazing!"
-//
-//        if messageLabel.text == message1{
-//            messageLabel.text = message2
-//        }
-//        else if messageLabel.text == message2{
-//            messageLabel.text = message3
-//        }
-//        else{
-//            messageLabel.text = message1
-//        }
+
         let messages = ["You are awesome!",
                         "You are great!",
                         "You are fantastic!",
@@ -52,9 +45,9 @@ class ViewController: UIViewController {
         
         //messageLabel.text = messages.randomElement()!
         
-        //var newIndex = -1
         var newIndex: Int
         
+        //show a message
         repeat{
             newIndex = Int.random(in: 0..<messages.count)
         }while index==newIndex
@@ -62,20 +55,36 @@ class ViewController: UIViewController {
         index = newIndex
         messageLabel.text = messages[index]
         
+        //show an image
         repeat{
             newIndex  = Int.random(in: 0..<numberOfImages)
         } while imageIndex == newIndex
         
         imageIndex = newIndex
         awesomeImage.image = UIImage(named: "image\(imageIndex)") 
-        
-//        messageLabel.text=messages[index]
-//        if index == messages.count-1{
-//            index = 0
-//        }
-//        else{
-//        index+=1
-//        }
+
+        //play a sound
+        repeat{
+            newIndex  = Int.random(in: 0..<numberOfSounds)
+        } while soundIndex == newIndex
+        soundIndex = newIndex
+        var soundName="sound\(soundIndex)"
+        //can we load in sound name?
+        if let sound = NSDataAsset(name: soundName){
+            //check if sound.data is a sound file
+            do{
+                try awesomePlayer = AVAudioPlayer(data: sound.data)
+                awesomePlayer.play()
+            }
+            catch{
+                print("ERROR: file \(soundName) didn't load.")
+            }
+        }
+        else{
+            //if reading in the NSDataAsset didn't work tell the developer
+            print("ERROR: file \(soundName) didn't load.")
+        }
+
     }
 
 }
